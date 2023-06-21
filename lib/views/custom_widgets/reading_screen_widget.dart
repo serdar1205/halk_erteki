@@ -3,19 +3,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:halk_erteki/views/utils/custom_text.dart';
 import 'package:halk_erteki/views/utils/theme.dart';
 
+import '../../data/model/tale_model.dart';
+
 class ReadingScreenWidget extends StatelessWidget {
-  const ReadingScreenWidget({
+  ReadingScreenWidget({
     Key? key,
-    required this.image,
-    required this.titleText,
+    required this.taleModel,
     required this.fontSize,
-    required this.bodyText,
   }) : super(key: key);
 
-  final String image;
-  final String titleText;
+  TaleModel taleModel;
   final double fontSize;
-  final String bodyText;
 
   @override
   Widget build(BuildContext context) {
@@ -27,49 +25,44 @@ class ReadingScreenWidget extends StatelessWidget {
             //img
             Container(
               height: 250,
+              width: double.infinity,
               padding: EdgeInsets.only(bottom: 5),
               child: Image.asset(
-                "assets/images/${image}",
-                fit: BoxFit.cover,
+                "assets/images/${taleModel.image}.jpg",
+                fit: BoxFit.fitWidth,
               ),
             ),
             //like
-            Positioned(
-                top: 10,
-                right: 10,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    color: AppColors.whiteLikeColor,
-                    child: Center(
-                      child: SvgPicture.asset(
-                        'assets/icons/like.svg',
-                        color: AppColors.likeColor,
-                        fit: BoxFit.contain,
-                        height: 20,
-                        width: 20,
-                      ),
-                    ),
-                  ),
-                )),
+            // Positioned(
+            //     top: 10,
+            //     right: 10,
+            //     child: ClipRRect(
+            //       borderRadius: BorderRadius.circular(10),
+            //       child: Container(
+            //         width: 40,
+            //         height: 40,
+            //         color: AppColors.whiteLikeColor,
+            //         child: Center(
+            //           child: SvgPicture.asset(
+            //             'assets/icons/like.svg',
+            //             color: AppColors.likeColor,
+            //             fit: BoxFit.contain,
+            //             height: 20,
+            //             width: 20,
+            //           ),
+            //         ),
+            //       ),
+            //     )),
           ],
         ),
         //title
         Padding(
-          padding:
-          const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-          child: TitleText(
-              titleText
-            //    "Turkmen halk ertekisi Akylly Ahmet",
-          ),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+          child: TitleText(taleModel.title),
         ),
         Padding(
-            padding:
-            const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-            child: BodyText(
-                bodyText, fontSize: fontSize)),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+            child: BodyText(taleModel.body, fontSize: fontSize)),
       ],
     );
   }

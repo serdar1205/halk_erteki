@@ -1,12 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class SeekBarData{
   final Duration position;
   final Duration duration;
+  final AudioPlayer player;
 
-  SeekBarData(this.position,this.duration);
+  SeekBarData(this.position,this.duration,this.player);
 }
 
 class SeekBar extends StatefulWidget {
@@ -14,12 +16,14 @@ class SeekBar extends StatefulWidget {
   final Duration duration;
   final ValueChanged<Duration>? onChanged;
   final ValueChanged<Duration>? onChangeEnd;
+  final AudioPlayer player;
 
   SeekBar({Key? key,
     required this.position,
     required this.duration,
     this.onChanged,
-    this.onChangeEnd}) : super(key: key);
+    this.onChangeEnd,
+    required this.player}) : super(key: key);
 
   @override
   State<SeekBar> createState() => _SeekBarState();
@@ -42,6 +46,7 @@ class _SeekBarState extends State<SeekBar> {
 
   @override
   Widget build(BuildContext context) {
+    double max = widget.duration.inMilliseconds.toDouble();
     return Row(
       children: [
         Text(_formatDuaration(widget.position)),
@@ -61,11 +66,9 @@ class _SeekBarState extends State<SeekBar> {
               overlayColor: Colors.white
           ), child: Slider(
             min: 0.0,
-            max: widget.duration.inMilliseconds.toDouble(),
+            max: max,
 
-            value: min(_dragValue ?? widget.position.inMicroseconds.toDouble(),
-              widget.position.inMicroseconds.toDouble(),
-            ),
+            value: _dragValue ?? widget.position.inMilliseconds.toDouble(),
             onChanged: (value){
               setState((){
                 _dragValue = value;
@@ -77,7 +80,12 @@ class _SeekBarState extends State<SeekBar> {
                     )
                 );
               }
+
+              if(value != null){
+                widget.player.seek(Duration(microseconds: value.round()));
+              }
             },
+
             onChangeEnd: (value){
               if(widget.onChanged != null){
                 widget.onChanged!(
@@ -86,6 +94,14 @@ class _SeekBarState extends State<SeekBar> {
                     )
                 );
               }
+
+              // if(value != null){
+              //   widget.player.seek(Duration(microseconds: value.round()));
+              // }
+              // if(widget.player.position != Duration(microseconds: value.round())
+              // || widget.player.duration != null){
+              //   widget.player.seek(Duration(microseconds: value.round()));
+              // }
               _dragValue = null;
             },
           )),

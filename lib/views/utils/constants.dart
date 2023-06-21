@@ -6,3 +6,6 @@ const String listeningPagee = '/listeningPagee';
 const String readingPagee = '/readingPagee';
 const String readingText = '/readingText';
 const String songPage = '/songPage';
+
+///hive
+const favoritesBox = 'favorite_books';

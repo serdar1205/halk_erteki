@@ -11,6 +11,14 @@ class PlayerButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         StreamBuilder(
+            stream: audioPlayer.shuffleModeEnabledStream,
+            builder: (context, index){
+              return IconButton(onPressed: audioPlayer.shuffle ,
+                icon: Icon(Icons.shuffle_outlined , color: Colors.white,),
+                iconSize: 35,
+              );
+            } ),
+        StreamBuilder(
             stream: audioPlayer.sequenceStateStream,
             builder: (context, index){
               return IconButton(onPressed: audioPlayer.hasPrevious ? audioPlayer.seekToPrevious : null,
@@ -65,6 +73,14 @@ class PlayerButtons extends StatelessWidget {
               return IconButton(onPressed: audioPlayer.hasNext ? audioPlayer.seekToNext : null,
                 icon: Icon(Icons.skip_next , color: Colors.white,),
                 iconSize: 45,
+              );
+            } ),
+        StreamBuilder(
+            stream: audioPlayer.loopModeStream,
+            builder: (context, index){
+              return IconButton(onPressed: null ,
+                icon: Icon(Icons.loop , color: Colors.white,),
+                iconSize: 35,
               );
             } ),
       ],

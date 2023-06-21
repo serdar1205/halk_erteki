@@ -7,7 +7,6 @@ abstract class AppColors {
   static const Color appBarLight = Color.fromRGBO(230, 230, 230, 1);
   static const Color cardLight = Color.fromRGBO(230, 230, 230, 1);
   static const Color textLight = Color.fromRGBO(200, 200, 200, 1);
-
   static const Color backgroundDark = Color.fromRGBO(17, 18, 40, 1);
   static const Color appBarDark = Color.fromRGBO(9, 10, 32, 1);
   static const Color cardDark = Color.fromRGBO(26, 27, 53, 1);
@@ -37,7 +36,7 @@ abstract class AppTheme {
   ///Light theme
   static ThemeData light() => ThemeData(
         brightness: Brightness.light,
-        accentColor: AppColors.backgroundLight,
+        hintColor: AppColors.backgroundLight,
         visualDensity: visualDensity,
         appBarTheme: AppBarTheme(
             backgroundColor: AppColors.appBarLight,
@@ -57,7 +56,7 @@ abstract class AppTheme {
   ///Dark theme
   static ThemeData dark() => ThemeData(
         brightness: Brightness.dark,
-        accentColor: AppColors.backgroundDark,
+        hintColor: AppColors.backgroundDark,
         visualDensity: visualDensity,
         appBarTheme: AppBarTheme(
             backgroundColor: AppColors.appBarDark,

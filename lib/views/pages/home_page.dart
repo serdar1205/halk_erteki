@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:halk_erteki/logic/cubit/read_cubit.dart';
 import 'package:halk_erteki/logic/cubit/read_state.dart';
-import 'package:halk_erteki/views/pages/listening_page.dart';
-import 'package:halk_erteki/views/pages/reading_page.dart';
+import 'package:halk_erteki/views/pages/listen/listening_page.dart';
+import 'package:halk_erteki/views/pages/read/reading_page.dart';
 import 'package:halk_erteki/views/utils/constants.dart';
 import 'package:halk_erteki/views/utils/theme.dart';
 
@@ -117,10 +117,10 @@ class HomePage extends StatelessWidget {
           builder: (context, state) {
             return GestureDetector(
               onTap: () {
-                if (state.isRead == true)
+                //if (state.isRead == true)
                   Navigator.pushNamed(context, likedReadPage);
-                else
-                  Navigator.pushNamed(context, likedListenPage);
+                //else
+                 // Navigator.pushNamed(context, likedListenPage);
               },
               child: Container(
                 decoration: BoxDecoration(
